@@ -1,0 +1,60 @@
+{
+  "name": "@profullstack/bridges",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Let a host site's signed-in users use an app automatically: an account bridge over OAuth 2.1 authorization code + PKCE S256, with silent sign-in. Host handlers and app client are fetch-style (Request in, Response out), stateless (sealed codes), dependency-free, and run on Node, Bun, Deno, Workers and the Next.js edge.",
+  "keywords": [
+    "sso",
+    "single-sign-on",
+    "oauth",
+    "oauth2.1",
+    "pkce",
+    "account-linking",
+    "bridge",
+    "silent-sign-in",
+    "forum",
+    "nextjs",
+    "hono",
+    "bun",
+    "edge"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/profullstack/bridges.git"
+  },
+  "homepage": "https://github.com/profullstack/bridges#readme",
+  "bugs": {
+    "url": "https://github.com/profullstack/bridges/issues"
+  },
+  "license": "MIT",
+  "author": "Profullstack, Inc.",
+  "sideEffects": false,
+  "bin": {
+    "bridges": "./bin/bridges.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "types": "./index.d.ts",
+  "files": [
+    "src",
+    "bin",
+    "index.js",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
