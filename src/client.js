@@ -21,7 +21,8 @@ export function createBridgeClient(options) {
     if (typeof value !== 'string' || !value) throw new Error(`createBridgeClient: ${key} is required`);
   }
   assertSecret(clientSecret, 'createBridgeClient: clientSecret');
-  const fetchImpl = options.fetch ?? globalThis.fetch;
+  // Looked up per call, so a polyfill or a test stub installed later still applies.
+  const fetchImpl = (...args) => (options.fetch ?? globalThis.fetch)(...args);
   const stateTtl = (options.stateTtlSeconds ?? 600) * 1000;
 
   async function begin({ returnTo = '/', prompt } = {}) {

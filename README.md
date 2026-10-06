@@ -77,6 +77,28 @@ if (result.ok) {
 // redirect to result.returnTo
 ```
 
+## Sign in with CoinPay (or any OAuth 2.1 provider)
+
+`createOAuthClient` has the same `begin` / `complete` shape for a real OAuth 2.1 / OpenID Connect provider: authorization code with PKCE S256, then one userinfo call. The access token is then dropped, because this signs people in and does not act for them. `createCoinPayClient` is the [CoinPay](https://coinpayportal.com) preset. It asks for `openid did profile email`, and `sub` is the person's CoinPay **DID** when they have one. Sites built on CoinPay (c0upons.com, for one) use the same DID, so an app can link one person whether they arrive through the site's bridge or straight from CoinPay.
+
+```js
+import { createCoinPayClient } from '@profullstack/bridges';
+
+const coinpay = createCoinPayClient({
+  clientId: process.env.COINPAY_CLIENT_ID,          // register at coinpayportal.com
+  clientSecret: process.env.COINPAY_CLIENT_SECRET,
+  redirectUri: 'https://example.com/auth/coinpay/callback',
+  stateSecret: process.env.SESSION_SECRET,          // seals the state cookie, 32+ chars
+});
+const { url, cookie } = await coinpay.begin({ returnTo: '/' });
+// ... later, on the callback:
+const result = await coinpay.complete(request.url, cookies.coinpay_state); // { ok, user, returnTo }
+```
+
+CoinPay does not verify emails, so `email_verified` is false. Never use the email to find an existing account.
+
+**From a CLI.** A CLI signs in through the app in a browser. It opens the app's device-approval page with the provider named, so the person goes straight to CoinPay instead of the app's sign-in page. tsbb does this as `tsbb login <board> --with coinpay`.
+
 ## Security notes
 
 - **Redirect URIs match exactly.** An unregistered `redirect_uri` gets a plain 400 and never a redirect, so the endpoint can't become an open redirect that leaks codes.

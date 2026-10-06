@@ -1,9 +1,11 @@
 {
   "name": "@profullstack/bridges",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "description": "Let a host site's signed-in users use an app automatically: an account bridge over OAuth 2.1 authorization code + PKCE S256, with silent sign-in. Host handlers and app client are fetch-style (Request in, Response out), stateless (sealed codes), dependency-free, and run on Node, Bun, Deno, Workers and the Next.js edge.",
   "keywords": [
+    "coinpay",
+    "oidc",
     "sso",
     "single-sign-on",
     "oauth",
