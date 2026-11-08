@@ -10,7 +10,7 @@ Under the hood it is the OAuth 2.1 authorization-code flow with PKCE S256, cut d
 - **Stateless.** The code is sealed (AES-256-GCM) with the client secret and carries everything the token endpoint needs. The app's pending sign-in rides in one sealed cookie. Neither side needs a table. The host keeps only a replay set, in memory by default.
 - **Zero dependencies.** WebCrypto only. Runs on Node 20+, Bun, Deno, Cloudflare Workers and the edge.
 
-First used by [c0upons.com](https://c0upons.com), whose members are signed in to [c0upons.com/bbs](https://c0upons.com/bbs) (a [tsbb](https://github.com/profullstack/tsbb) board) automatically.
+First used by [c0upons.com](https://c0upons.pwa.pit.world), whose members are signed in to [c0upons.com/bbs](https://c0upons.pwa.pit.world/bbs) (a [tsbb](https://github.com/profullstack/tsbb) board) automatically.
 
 ## Install
 
